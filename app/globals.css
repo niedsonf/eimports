@@ -2,26 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer components {
+
+  .side_menu_item {
+    @apply flex items-center gap-2 py-4 pl-[22px] hover:bg-gray-600 text-gray-100 hover:text-white
+  }
+
+  .side_menu_item_text {
+    @apply invisible w-0 group-hover:visible group-hover:inline whitespace-nowrap
+  }
+
+  .form-input {
+    @apply rounded-md bg-gray-900 text-gray-300 p-4 placeholder:text-gray-500
+  }
+
+  .form-submit {
+    @apply h-12 rounded-md transition-colors bg-green-500 hover:bg-green-700 text-gray-100 px-5
+  }
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+:root {
+  --gray-100: #E1E1E6;
+  --gray-300: #C4C4CC;
+  --gray-400: #8D8D99;
+  --gray-500: #7C7C8A;
+  --gray-600: #323238;
+  --gray-700: #29292E;
+  --gray-800: #202024;
+  --gray-900: #121214;
+
+  --green-300: #00B37E;
+  --green-500: #00875F;
+  --green-700: #015F43;
+
+  --red-300: #F75A68;
+  --red-500: #AB222E;
+  --red-700: #7A1921;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--green-500);
+}
+
+::selection {
+  background-color: var(--green-500);
+  color: var(--gray-100);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--gray-800);
+  color: var(--gray-100);
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+input,
+button,
+textarea {
+  font: 400 1rem Roboto, sans-serif;
 }
