@@ -4,8 +4,8 @@ export default function PainelLayout({ children }: { children: React.ReactNode }
     return (
         <>
             <SideMenu />
-            <main className="flex w-full">
-                <div className="pl-16 flex-1">
+            <main className="flex w-full h-screen">
+                <div className="ml-16 flex-1">
                     {children}
                 </div>
             </main>

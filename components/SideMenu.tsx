@@ -1,3 +1,5 @@
+'use client'
+
 import {
     LogOut, CircleDollarSign,
     ArrowLeftRight,
@@ -9,37 +11,38 @@ import {
     Undo2,
 } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const ActionPages = [
     {
-        text: 'Buscar Compra',
+        text: 'Compras',
         icon: <PackageSearch height={20} width={20} />,
         href: '/sales'
     },
+    // {
+    //     text: 'Cadastrar Compra',
+    //     icon: <ShoppingCart height={20} width={20} />,
+    //     href: '/cadastrar_compra'
+    // },
+    // {
+    //     text: 'Registrar Troca',
+    //     icon: <ArrowLeftRight height={20} width={20} />,
+    //     href: '/registrar_troca'
+    // },
+    // {
+    //     text: 'Registrar Devolução',
+    //     icon: <Undo2 height={20} width={20} />,
+    //     href: '/registrar_devolucao'
+    // },
     {
-        text: 'Cadastrar Compra',
-        icon: <ShoppingCart height={20} width={20} />,
-        href: '/cadastrar_compra'
-    },
-    {
-        text: 'Registrar Troca',
-        icon: <ArrowLeftRight height={20} width={20} />,
-        href: '/registrar_troca'
-    },
-    {
-        text: 'Registrar Devolução',
-        icon: <Undo2 height={20} width={20} />,
-        href: '/registrar_devolucao'
-    },
-    {
-        text: 'Cadastrar Produto',
+        text: 'Estoque',
         icon: <PackagePlus height={20} width={20} />,
-        href: '/cadastrar_produto'
+        href: '/inventory'
     },
     {
-        text: 'Cadastrar Fornecedor',
+        text: 'Clientes',
         icon: <UserPlus height={20} width={20} />,
-        href: '/cadastrar_fornecedor'
+        href: '/customer'
     },
 ]
 
@@ -47,12 +50,12 @@ const StatisticPages = [
     {
         text: 'Lucro Mensal',
         icon: <CircleDollarSign height={20} width={20} />,
-        href: '/lucro_mensal'
+        href: '/month_profit'
     },
     {
         text: 'Giro de Estoque',
         icon: <LineChart height={20} width={20} />,
-        href: '/giro_estoque'
+        href: '/inventory_turnover'
     },
 ]
 
@@ -65,16 +68,20 @@ const AccountPages = [
 ]
 
 export function SideMenu() {
+
+    const pathname = usePathname()
+
     return (
         <aside className='absolute h-full w-16 hover:w-72 transition-all bg-gray-700 border-r border-gray-600 group overflow-hidden'>
-            <nav className='flex flex-col gap-8 mt-16'>
+            <nav className='flex flex-col gap-8 mt-[83px]'>
                 <div>
                     {
                         ActionPages.map((page, index) =>
                             <Link
+                                data-active={pathname === page.href}
                                 href={page.href}
                                 key={index}
-                                className='side_menu_item'
+                                className="side_menu_item"
                             >
                                 {page.icon}
                                 <span className='side_menu_item_text'>{page.text}</span>
@@ -82,12 +89,12 @@ export function SideMenu() {
                         )
                     }
                 </div>
-                <div className='flex flex-col gap-4'>
-                    <h6 className='side_menu_item_text pl-4 uppercase tracking-wider'>Estatísticas</h6>
+                <div>
                     <div>
                         {
                             StatisticPages.map((page, index) =>
                                 <Link
+                                    data-active={pathname === page.href}
                                     href={page.href}
                                     key={index}
                                     className='side_menu_item'
@@ -99,12 +106,12 @@ export function SideMenu() {
                         }
                     </div>
                 </div>
-                <div className='flex flex-col gap-4'>
-                    <h6 className='side_menu_item_text pl-4 uppercase tracking-wider'>Conta</h6>
+                <div>
                     <div>
                         {
                             AccountPages.map((page, index) =>
                                 <Link
+                                    data-active={pathname === page.href}
                                     href={page.href}
                                     key={index}
                                     className='side_menu_item'

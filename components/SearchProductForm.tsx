@@ -3,8 +3,6 @@
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as Dialog from "@radix-ui/react-dialog"
-import { NewSaleModal } from "./NewSaleModal"
 
 const searchSaleFormSchema = z.object({
     query: z.string(),
@@ -13,7 +11,7 @@ const searchSaleFormSchema = z.object({
 type SearchFormInputs = z.infer<typeof searchSaleFormSchema>
 
 
-export function SearchSaleForm() {
+export function SearchProductForm() {
 
     const {
         register,
@@ -31,7 +29,7 @@ export function SearchSaleForm() {
             >
                 <input
                     className="form-input"
-                    placeholder="Código da Compra"
+                    placeholder="Produto"
                     type="text"
                 />
                 <button
@@ -39,17 +37,6 @@ export function SearchSaleForm() {
                     className="form-submit"
                 >Buscar</button>
             </form>
-            <div
-                className="h-8 w-[1px] rounded bg-gray-600"
-            />
-            <Dialog.Root>
-                <Dialog.Trigger asChild>
-                    <button
-                        className="form-submit"
-                    >Nova Compra</button>
-                </Dialog.Trigger>
-                <NewSaleModal />
-            </Dialog.Root>
         </div>
     )
 }
