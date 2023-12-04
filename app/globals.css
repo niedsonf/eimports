@@ -12,12 +12,16 @@
     @apply invisible w-0 group-hover:visible group-hover:inline whitespace-nowrap
   }
 
+  .side_menu_divider {
+    @apply h-[1px] bg-gray-600 rounded mx-6
+  }
+
   .form-input {
     @apply flex items-center rounded-md bg-gray-900 text-gray-300 p-4 placeholder:text-gray-500
   }
 
   .form-submit {
-    @apply h-12 rounded-md transition-colors bg-green-500 hover:bg-green-700 text-gray-100 px-5
+    @apply h-12 rounded-md hover:transition-colors bg-green-500 hover:bg-green-700 text-gray-100 px-5
   }
 
   .form-wrapper {
@@ -30,6 +34,10 @@
 
   .tabs-trigger {
     @apply bg-gray-700 p-4 first:rounded-bl-lg last:rounded-br-lg data-[state='active']:bg-green-500 border-r border-gray-600 text-gray-300
+  }
+
+  .status-indicator {
+    @apply relative grid place-items-center w-1 h-1 rounded-full animate-pulse bg-green-500 after:content-[''] after:w-[6px] after:h-[6px] after:absolute after:rounded-full after:bg-green-300 after:animate-ping
   }
 
 }
@@ -76,6 +84,10 @@ body {
   background-color: var(--gray-800);
   color: var(--gray-100);
   -webkit-font-smoothing: antialiased;
+}
+
+body, html {
+  min-height: 100dvh;
 }
 
 body,

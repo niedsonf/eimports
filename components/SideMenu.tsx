@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation';
 
 const ActionPages = [
     {
-        text: 'Compras',
+        text: 'Vendas',
         icon: <PackageSearch height={20} width={20} />,
         href: '/sales'
     },
@@ -73,7 +73,7 @@ export function SideMenu() {
 
     return (
         <aside className='absolute h-full w-16 hover:w-72 transition-all bg-gray-700 border-r border-gray-600 group overflow-hidden'>
-            <nav className='flex flex-col gap-8 mt-[83px]'>
+            <nav className='flex flex-col gap-6 mt-[83px]'>
                 <div>
                     {
                         ActionPages.map((page, index) =>
@@ -89,39 +89,39 @@ export function SideMenu() {
                         )
                     }
                 </div>
+                <div className='side_menu_divider' />
                 <div>
-                    <div>
-                        {
-                            StatisticPages.map((page, index) =>
-                                <Link
-                                    data-active={pathname === page.href}
-                                    href={page.href}
-                                    key={index}
-                                    className='side_menu_item'
-                                >
-                                    {page.icon}
-                                    <span className='side_menu_item_text'>{page.text}</span>
-                                </Link>
-                            )
-                        }
-                    </div>
+
+                    {
+                        StatisticPages.map((page, index) =>
+                            <Link
+                                data-active={pathname === page.href}
+                                href={page.href}
+                                key={index}
+                                className='side_menu_item'
+                            >
+                                {page.icon}
+                                <span className='side_menu_item_text'>{page.text}</span>
+                            </Link>
+                        )
+                    }
+
                 </div>
+                <div className='side_menu_divider' />
                 <div>
-                    <div>
-                        {
-                            AccountPages.map((page, index) =>
-                                <Link
-                                    data-active={pathname === page.href}
-                                    href={page.href}
-                                    key={index}
-                                    className='side_menu_item'
-                                >
-                                    {page.icon}
-                                    <span className='side_menu_item_text'>{page.text}</span>
-                                </Link>
-                            )
-                        }
-                    </div>
+                    {
+                        AccountPages.map((page, index) =>
+                            <Link
+                                data-active={pathname === page.href}
+                                href={page.href}
+                                key={index}
+                                className='side_menu_item'
+                            >
+                                {page.icon}
+                                <span className='side_menu_item_text'>{page.text}</span>
+                            </Link>
+                        )
+                    }
                 </div>
             </nav>
         </aside>
