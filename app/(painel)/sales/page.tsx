@@ -14,11 +14,14 @@ export default function SalesPage() {
     const holdSale = useContextSelector(SalesContext, context => context.holdSale)
 
     return (
-        <div className="h-full">
+        <div className="h-full flex flex-col-reverse lg:flex-col">
             <section className="flex items-center justify-center bg-gray-700 p-4 border-b border-gray-600">
                 <SearchSaleForm />
             </section>
-            <div className="w-full max-w-screen-lg h-full max-h-[calc(100%-83px)] mx-auto overflow-hidden">
+            <div className={clsx(
+                "w-full lg:max-w-screen-lg h-full max-h-[calc(100%-83px)]",
+                "mx-auto px-4 lg:px-0"
+            )}>
                 {
                     onHoldSale
                         ? <div className="flex flex-col gap-6 mt-6">
@@ -32,7 +35,7 @@ export default function SalesPage() {
                             </div>
                             <SaleDetailed sale={onHoldSale} />
                         </div>
-                        : <div className="flex items-start gap-6 mt-6">
+                        : <div className="flex flex-col lg:flex-row items-start gap-6 mt-6">
                             <section className="flex flex-col min-w-[200px]">
                                 <div className="bg-gray-600 rounded-md px-4 py-6">
                                     Filtros

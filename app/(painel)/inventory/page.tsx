@@ -27,7 +27,7 @@ export default function RegisterProductPage() {
                     </Tabs.Trigger>
                 </Tabs.List>
                 <Tabs.Content value="register">
-                    <div className="w-full flex items-start justify-center gap-16 pt-12">
+                    <div className="w-full flex flex-col lg:flex-row items-start justify-center gap-16 pt-12">
                         <div className="w-96">
                             <NewProductForm />
                         </div>

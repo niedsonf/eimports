@@ -72,9 +72,9 @@ export function SideMenu() {
     const pathname = usePathname()
 
     return (
-        <aside className='absolute h-full w-16 hover:w-72 transition-all bg-gray-700 border-r border-gray-600 group overflow-hidden'>
-            <nav className='flex flex-col gap-6 mt-[83px]'>
-                <div>
+        <aside className='absolute z-20 h-full flex w-16 hover:w-72 transition-all bg-gray-700 border-r border-gray-600 group overflow-hidden'>
+            <nav className='grow flex flex-col-reverse lg:flex-col justify-start gap-6 mb-[166px] lg:mb-0 lg:mt-[83px]'>
+                <div className='flex flex-col-reverse lg:flex-col'>
                     {
                         ActionPages.map((page, index) =>
                             <Link
@@ -90,7 +90,7 @@ export function SideMenu() {
                     }
                 </div>
                 <div className='side_menu_divider' />
-                <div>
+                <div className='flex flex-col-reverse lg:flex-col'>
 
                     {
                         StatisticPages.map((page, index) =>
@@ -108,7 +108,7 @@ export function SideMenu() {
 
                 </div>
                 <div className='side_menu_divider' />
-                <div>
+                <div className='flex flex-col-reverse lg:flex-col'>
                     {
                         AccountPages.map((page, index) =>
                             <Link

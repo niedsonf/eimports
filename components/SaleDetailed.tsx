@@ -10,7 +10,7 @@ export function SaleDetailed({ sale }: { sale: Sale }) {
         )}>
             <header className='flex justify-between items-start gap-6 border-b border-gray-800/40 pb-6'>
                 <div>
-                    <h2 className='text-lg text-white'>{sale.client.name}</h2>
+                    <h2 className='text-lg text-gray-100'>{sale.client.name}</h2>
                     <span className='text-md text-gray-300'>{sale.date.toLocaleDateString()}</span>
                 </div>
                 <div className='flex items-center gap-2'>
@@ -19,7 +19,7 @@ export function SaleDetailed({ sale }: { sale: Sale }) {
                 </div>
             </header>
             <div className='grow flex flex-col justify-end gap-1'>
-                <h3 className='text-lg text-gray-300'>Produtos na venda:</h3>
+                <h3 className='text-sm text-gray-300'>Produtos na venda:</h3>
                 <ul className='[&>li]:text-base text-gray-100 [&_span]:text-green-300'>
                     {sale.products.map(product => (
                         <li key={product.id}>
@@ -32,18 +32,18 @@ export function SaleDetailed({ sale }: { sale: Sale }) {
             <footer className='flex justify-between items-center border-t border-gray-800/40 pt-6'>
                 <div className='flex items-center gap-6'>
                     <div>
-                        <h3 className='text-md text-gray-300'>Valor Total:</h3>
-                        <span className='text-xl text-green-300'>R$ {sale.total}</span>
+                        <h3 className='text-sm text-gray-300'>Valor Total:</h3>
+                        <span className='text-base text-green-300'>R$ {sale.total}</span>
                     </div>
                     <div className="h-8 w-[1px] rounded bg-gray-800/40" />
                     <div>
-                        <h3 className='text-md text-gray-300'>Método:</h3>
-                        <span className='text-xl text-green-300'>Crédito</span>
+                        <h3 className='text-sm text-gray-300'>Método:</h3>
+                        <span className='text-base text-green-300'>Crédito</span>
                     </div>
                     <div className="h-8 w-[1px] rounded bg-gray-800/40" />
                     <div>
-                        <h3 className='text-md text-gray-300'>Parcelas:</h3>
-                        <span className='text-xl text-green-300'>2</span>
+                        <h3 className='text-sm text-gray-300'>Parcelas:</h3>
+                        <span className='text-base text-green-300'>2</span>
                     </div>
                 </div>
                 <div className='flex items-center gap-6'>
