@@ -15,7 +15,7 @@ export function SaleUnit({ sale }: { sale: Sale }) {
         )}>
             <div className='flex flex-col justify-center gap-6'>
                 <div>
-                    <h2 className='text-lg text-gray-100'>{sale.client.name}</h2>
+                    <h2 className='text-lg text-gray-100'>{sale.customer.name}</h2>
                     <span className='text-sm text-gray-300'>{sale.date.toLocaleDateString()}</span>
                 </div>
                 <div className='flex items-start gap-8'>

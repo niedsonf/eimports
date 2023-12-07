@@ -14,7 +14,6 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-tabs": "^1.0.4",
-    "argon2": "^0.31.2",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
     "immer": "^10.0.3",
@@ -25,6 +24,7 @@
     "react-hook-form": "^7.48.2",
     "remask": "^1.2.2",
     "use-context-selector": "^1.4.1",
+    "use-mask-input": "^3.3.7",
     "zod": "^3.22.4"
   },
   "devDependencies": {

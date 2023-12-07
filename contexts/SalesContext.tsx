@@ -17,9 +17,9 @@ export function SalesContextProvider({ children }: { children: React.ReactNode }
         onHoldSale: null,
         sales: [
             {
-                id: 1,
-                client: {
-                    id: 1,
+                id: '1',
+                customer: {
+                    id: ' 1',
                     cpf_cnpj: '70286120402',
                     name: 'Cleyton Arrasta Fitas',
                     phone: '11999999999',
@@ -27,7 +27,7 @@ export function SalesContextProvider({ children }: { children: React.ReactNode }
                 date: new Date(),
                 products: [
                     {
-                        id: 1,
+                        id: ' 1',
                         category: 'Celular',
                         name: 'Xiaomi Redmi 12C',
                         description: 'Celular top de linha',
@@ -35,7 +35,7 @@ export function SalesContextProvider({ children }: { children: React.ReactNode }
                         quantity: 3,
                     },
                     {
-                        id: 2,
+                        id: ' 2',
                         category: 'Celular',
                         name: 'Maçã Bagre 13S',
                         description: 'Celular top de linha',

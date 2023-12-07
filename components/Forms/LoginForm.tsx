@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { WebServer } from "@/services/WebServer"
-import * as argon2 from "argon2";
+import { useContextSelector } from "use-context-selector"
+import { UserContext } from "@/contexts/UserContext"
+import { redirect } from "next/navigation"
 
 const loginFormSchema = z.object({
     login: z.string().min(3, 'Usuário inválido'),
@@ -14,30 +16,25 @@ const loginFormSchema = z.object({
 type LoginFormInputs = z.infer<typeof loginFormSchema>
 
 export function LoginForm() {
+    const updateUser = useContextSelector(UserContext, context => context.updateUser)
 
     const {
         register,
         handleSubmit,
         formState: { isSubmitting, errors },
     } = useForm<LoginFormInputs>({
-        resolver: zodResolver(loginFormSchema),
-        shouldFocusError: false,
+        resolver: zodResolver(loginFormSchema)
     })
 
     async function onSubmit(data: LoginFormInputs) {
-        console.log(data)
         // try {
-        //     const res = await argon2.hash(data.password)
-        //     console.log(res)
+        //     const isValidLogin = await WebServer.Login({ login: data.login, password: data.password })
+        //     console.log(isValidLogin)
         // } catch (e) {
         //     console.log(e)
         // }
-        try {
-            const isValidLogin = await WebServer.Login({ login: data.login, password: data.password })
-            console.log(isValidLogin)
-        } catch (e) {
-            console.log(e)
-        }
+        updateUser({ name: data.login })
+        // redirect('/sales')
         return
     }
 
@@ -48,7 +45,7 @@ export function LoginForm() {
         >
             <input
                 className="form-input"
-                placeholder="Email ou Usuário"
+                placeholder="Nome"
                 type="text"
                 maxLength={50}
                 required

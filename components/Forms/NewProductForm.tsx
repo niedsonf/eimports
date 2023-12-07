@@ -1,9 +1,15 @@
 'use client'
 
+import { CategoriesContext } from '@/contexts/CategoriesContext'
 import * as Select from '@radix-ui/react-select'
-import { Boxes, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
+import { useContextSelector } from 'use-context-selector'
 
 export function NewProductForm() {
+    const categories = useContextSelector(CategoriesContext, context => context.categories)
+
+    
+
     return (
         <form
             action=""
@@ -22,9 +28,12 @@ export function NewProductForm() {
                 placeholder="Descrição"
                 type="text"
             />
-            <Select.Root>
-                <Select.Trigger className='form-input relative' >
-                    <Select.Value className='text-gray-300' placeholder='Selecione categoria' />
+            <Select.Root disabled={categories.length < 1}>
+                <Select.Trigger className='form-input relative aria-disabled:cursor-not-allowed' aria-disabled={categories.length < 1}>
+                    <Select.Value
+                        className='text-gray-300 placeholder:text-gray-500'
+                        placeholder={categories.length < 1 ? 'Sem categorias cadastradas' : 'Selecione categoria'}
+                    />
                     <Select.Icon className="absolute right-2">
                         <ChevronDown />
                     </Select.Icon>
@@ -32,12 +41,12 @@ export function NewProductForm() {
                 <Select.Content>
                     <Select.Viewport className='bg-gray-800 p-2 rounded-md border border-gray-600'>
                         <Select.Group>
-                            {["Garrafas", "Eletrônicos", "Celulares", "Notebooks", "Canetas", "Vapes"].map((item, index) => {
+                            {categories.map((category, i) => {
                                 return <Select.Item
                                     className='hover:bg-gray-600 text-gray-300 p-4 rounded cursor-pointer'
-                                    key={index}
-                                    value={item}>
-                                    <Select.ItemText>{item}</Select.ItemText>
+                                    key={i}
+                                    value={category.description}>
+                                    <Select.ItemText>{category.description}</Select.ItemText>
                                 </Select.Item>
                             })}
                         </Select.Group>
