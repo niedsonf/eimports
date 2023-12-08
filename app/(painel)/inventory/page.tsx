@@ -20,17 +20,27 @@ export default function InventoryPage() {
 
     useEffect(() => {
         async function getProducts() {
-            const productsData = await WebServer.GetProducts({ token })
-            fetchProducts(productsData)
-            console.log('Fetch Products: ', productsData)
+            try {
+                const productsData = await WebServer.GetProducts({ token })
+                fetchProducts(productsData)
+                console.log('Fetch Products: ', productsData)
+            } catch (e) {
+                console.log(e)
+            }
         }
         async function getCategories() {
-            const categoriesData = await WebServer.GetCategories({ token })
-            fetchCategories(categoriesData)
-            console.log('Fetch Categories: ', categoriesData)
+            try {
+                const categoriesData = await WebServer.GetCategories({ token })
+                fetchCategories(categoriesData)
+                console.log('Fetch Categories: ', categoriesData)
+            } catch (e) {
+                console.log(e)
+            }
         }
-        getCategories()
-        getProducts()
+        if (token) {
+            getCategories()
+            getProducts()
+        }
     }, [fetchCategories, fetchProducts, token])
 
     return (
