@@ -21,11 +21,10 @@ export function categoriesReducer(state: CategoriesState, action: any) {
                     draft.categories.splice(i, 1)
                 })
             }
-        case CategoriesActionTypes.UPDATE_CATEGORY:
+        case CategoriesActionTypes.FETCH_CATEGORIES:
             {
                 return produce(state, (draft) => {
-                    const i = draft.categories.findIndex(category => category.id === action.payload.id)
-                    draft.categories[i] = action.payload
+                    draft.categories = action.payload
                 })
             }
         default:

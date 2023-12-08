@@ -118,7 +118,7 @@ export function SideMenu() {
                     <h3 className="text-xs text-gray-100 leading-[1px]">Olá,<br />
                         <span className="text-green-300 text-right pl-2 text-lg">{name}</span>
                     </h3>
-                    <span className="diamond" />
+                    <span className="diamond grow" />
                 </div>
                 <span className="diamond group-hover:invisible absolute self-center" />
             </div>

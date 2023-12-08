@@ -1,4 +1,8 @@
+'use client'
+
 import { CategoriesContext } from "@/contexts/CategoriesContext"
+import { UserContext } from "@/contexts/UserContext"
+import { WebServer } from "@/services/WebServer"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -12,6 +16,7 @@ const newCategoryFormSchema = z.object({
 type NewCategoryFormInputs = z.infer<typeof newCategoryFormSchema>
 
 export function NewCategoryForm() {
+    const token = useContextSelector(UserContext, context => context.access_token)
     const createCategory = useContextSelector(CategoriesContext, context => context.createCategory)
     const [isValid, setIsValid] = useState<boolean>(true)
 
@@ -24,12 +29,18 @@ export function NewCategoryForm() {
         resolver: zodResolver(newCategoryFormSchema)
     })
 
-    function onSubmit(data: NewCategoryFormInputs) {
-        const isNewCategoryValid = createCategory({
-            id: crypto.randomUUID(),
+    async function onSubmit(data: NewCategoryFormInputs) {
+        const newCategory = await WebServer.CreateCategory({
+            token,
             description: data.description
         })
-        if (isNewCategoryValid) {
+        console.log('Create Category: ', newCategory)
+        const isNewCategoryValid = newCategory ? createCategory({
+            id: newCategory.id,
+            seller_id: newCategory.seller_id,
+            description: newCategory.description
+        }) : false
+        if (newCategory) {
             setIsValid(true)
             reset()
         } else {

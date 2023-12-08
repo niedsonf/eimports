@@ -3,7 +3,7 @@
 import { Customer } from "@/@types/Customer";
 import { createCustomerAction, deleteCustomerAction } from "@/reducers/customers/actions";
 import { CustomersState, customersReducer } from "@/reducers/customers/reducer";
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import { createContext } from "use-context-selector";
 
 interface CustomersContextType extends CustomersState {
@@ -16,14 +16,6 @@ export const CustomersContext = createContext({} as CustomersContextType)
 export function CustomersContextProvider({ children }: { children: React.ReactNode }) {
     const [state, dispatch] = useReducer(customersReducer, {
         customers: []
-    }, (initialState) => {
-        const storedStateAsJSON = localStorage.getItem('@eimports:customers-1.0.0')
-
-        if (storedStateAsJSON) {
-            return JSON.parse(storedStateAsJSON)
-        }
-
-        return initialState
     })
 
     const { customers } = state
@@ -40,11 +32,6 @@ export function CustomersContextProvider({ children }: { children: React.ReactNo
     const deleteCustomer = useCallback((id: string) => {
         dispatch(deleteCustomerAction(id))
     }, [])
-
-    useEffect(() => {
-        const stateJSON = JSON.stringify(state)
-        localStorage.setItem('@eimports:customers-1.0.0', stateJSON)
-    }, [state])
 
     return (
         <CustomersContext.Provider value={{ customers, createCustomer, deleteCustomer }}>

@@ -1,53 +1,41 @@
 'use client'
 
 import { Category } from "@/@types/Category";
-import { createCategoryAction, deleteCategoryAction } from "@/reducers/categories/actions";
+import { createCategoryAction, deleteCategoryAction, fetchCategoriesAction } from "@/reducers/categories/actions";
 import { CategoriesState, categoriesReducer } from "@/reducers/categories/reducer";
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import { createContext } from "use-context-selector";
 
 interface CategoriesContextType extends CategoriesState {
-    createCategory: (category: Category) => boolean;
-    deleteCategory: (id: string) => void;
+    createCategory: (category: Category) => void;
+    deleteCategory: (id: number) => void;
+    fetchCategories: (categories: Category[]) => void;
 }
 
 export const CategoriesContext = createContext({} as CategoriesContextType)
 
 export function CategoriesContextProvider({ children }: { children: React.ReactNode }) {
     const [state, dispatch] = useReducer(categoriesReducer, {
-        categories: []
-    }, (initialState) => {
-        const storedStateAsJSON = localStorage.getItem('@eimports:categories-1.0.0')
-
-        if (storedStateAsJSON) {
-            return JSON.parse(storedStateAsJSON)
-        }
-
-        return initialState
+        categories: [],
     })
 
     const { categories } = state
 
     const createCategory = useCallback((category: Category) => {
-        if (categories.find(categoryInRow => category.id === categoryInRow.id)) {
-            return false
-        } else {
-            dispatch(createCategoryAction(category))
-            return true
-        }
+        dispatch(createCategoryAction(category))
     }, [])
 
-    const deleteCategory = useCallback((id: string) => {
+    const deleteCategory = useCallback((id: number) => {
         dispatch(deleteCategoryAction(id))
     }, [])
 
-    useEffect(() => {
-        const stateJSON = JSON.stringify(state)
-        localStorage.setItem('@eimports:categories-1.0.0', stateJSON)
-    }, [state])
+    const fetchCategories = useCallback((categories: Category[]) => {
+        dispatch(fetchCategoriesAction(categories))
+    }, [])
+
 
     return (
-        <CategoriesContext.Provider value={{ categories, createCategory, deleteCategory }}>
+        <CategoriesContext.Provider value={{ categories, createCategory, deleteCategory, fetchCategories }}>
             {children}
         </CategoriesContext.Provider>
     )

@@ -2,7 +2,7 @@ import { CustomersList } from "@/components/CustomersList";
 import { NewCustomerForm } from "@/components/Forms/NewCustomerForm";
 import { SearchCustomerForm } from "@/components/Forms/SearchCustomerForm";
 
-export default function RegisterCustomerPage() {
+export default function CustomersPage() {
     return (
         <div className="h-screen">
             <section className="flex items-center justify-center bg-gray-700 p-4 border-b border-gray-600">

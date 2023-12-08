@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { WebServer } from "@/services/WebServer"
 import { useContextSelector } from "use-context-selector"
 import { UserContext } from "@/contexts/UserContext"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 const loginFormSchema = z.object({
     login: z.string().min(3, 'Usuário inválido'),
@@ -17,6 +17,7 @@ type LoginFormInputs = z.infer<typeof loginFormSchema>
 
 export function LoginForm() {
     const updateUser = useContextSelector(UserContext, context => context.updateUser)
+    const router = useRouter()
 
     const {
         register,
@@ -27,15 +28,13 @@ export function LoginForm() {
     })
 
     async function onSubmit(data: LoginFormInputs) {
-        // try {
-        //     const isValidLogin = await WebServer.Login({ login: data.login, password: data.password })
-        //     console.log(isValidLogin)
-        // } catch (e) {
-        //     console.log(e)
-        // }
-        updateUser({ name: data.login })
-        // redirect('/sales')
-        return
+        try {
+            const userData = await WebServer.Login({ login: data.login, password: data.password })
+            updateUser({ access_token: userData.data.access_token, name: userData.data.name, login: userData.data.login })
+            router.push('/sales')
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (

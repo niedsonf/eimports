@@ -23,7 +23,7 @@ export function SaleDetailed({ sale }: { sale: Sale }) {
                 <ul className='[&>li]:text-base text-gray-100 [&_span]:text-green-300'>
                     {sale.products.map(product => (
                         <li key={product.id}>
-                            <span>{product.quantity}x</span> {product.name}
+                            {/* <span>{product.quantity}x</span> {product.name} */}
                         </li>
 
                     ))}

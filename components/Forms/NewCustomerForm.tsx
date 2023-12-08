@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useContextSelector } from "use-context-selector"
 import { z } from "zod"
-import { useHookFormMask } from "use-mask-input"
+// import { useHookFormMask } from "use-mask-input"
 import { useState } from "react"
 
 const newCustomerFormSchema = z.object({
@@ -27,7 +27,7 @@ export function NewCustomerForm() {
     } = useForm<NewCustomerFormInputs>({
         resolver: zodResolver(newCustomerFormSchema),
     })
-    const registerWithMask = useHookFormMask(register)
+    // const registerWithMask = useHookFormMask(register)
     const [isValid, setIsValid] = useState<boolean>(true)
 
     async function onSubmit(data: NewCustomerFormInputs) {
@@ -63,7 +63,7 @@ export function NewCustomerForm() {
                 required
                 {...register('name')}
             />
-            <input
+            {/* <input
                 className="form-input"
                 placeholder="Telefone"
                 type="text"
@@ -72,8 +72,8 @@ export function NewCustomerForm() {
                     showMaskOnHover: false,
                     autoUnmask: true,
                 })}
-            />
-            <input
+            /> */}
+            {/* <input
                 className="form-input"
                 placeholder="CPF/CNPJ"
                 type="text"
@@ -82,7 +82,7 @@ export function NewCustomerForm() {
                     showMaskOnHover: false,
                     autoUnmask: true,
                 })}
-            />
+            /> */}
             <span className="text-xs text-red-300">
                 {(errors.name || errors.cpf_cnpj || errors.phone) ?
                     'Dados inválidos, verifique e tente novamente.'

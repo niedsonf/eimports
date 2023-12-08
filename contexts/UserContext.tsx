@@ -3,7 +3,7 @@
 import { User } from "@/@types/User";
 import { logoutAction, updateUserAction } from "@/reducers/user/actions";
 import { UserState, userReducer } from "@/reducers/user/reducer";
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useEffect, useLayoutEffect, useReducer } from "react";
 import { createContext } from "use-context-selector";
 
 interface UserContextType extends UserState {
@@ -15,34 +15,40 @@ export const UserContext = createContext({} as UserContextType)
 
 export function UserContextProvider({ children }: { children: React.ReactNode }) {
     const [state, dispatch] = useReducer(userReducer, {
-        name: ''
-    }, (initialState) => {
-        const storedStateAsJSON = localStorage.getItem('@eimports:user-1.0.0')
-
-        if (storedStateAsJSON) {
-            return JSON.parse(storedStateAsJSON)
-        }
-
-        return initialState
+        access_token: '',
+        name: '',
+        login: ''
     })
 
-    const { name } = state
+    const { access_token, name, login } = state
 
     const updateUser = useCallback((user: User) => {
-       dispatch(updateUserAction(user))
+        dispatch(updateUserAction(user))
     }, [])
 
     const logout = useCallback(() => {
         dispatch(logoutAction())
     }, [])
 
+    useLayoutEffect(() => {
+        if (!access_token) {
+            const userJSON = localStorage.getItem('@eimports:user-1.0.0')
+            if (userJSON) {
+                const user = JSON.parse(userJSON)
+                dispatch(updateUserAction(user))
+            }
+        }
+    }, [])
+
     useEffect(() => {
-        const stateJSON = JSON.stringify(state)
-        localStorage.setItem('@eimports:user-1.0.0', stateJSON)
+        if (access_token) {
+            const stateJSON = JSON.stringify(state)
+            localStorage.setItem('@eimports:user-1.0.0', stateJSON)
+        }
     }, [state])
 
     return (
-        <UserContext.Provider value={{ name, updateUser, logout }}>
+        <UserContext.Provider value={{ access_token, name, login, updateUser, logout }}>
             {children}
         </UserContext.Provider>
     )
